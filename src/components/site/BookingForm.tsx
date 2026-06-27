@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { submitAppointment } from "@/lib/appointments";
-import { PLOTS } from "@/lib/site-data";
+import { usePlots } from "@/lib/site-content";
 
 export function BookingForm({
   defaultPlot,
@@ -12,6 +12,7 @@ export function BookingForm({
 }) {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const { data: plots = [] } = usePlots();
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -63,14 +64,14 @@ export function BookingForm({
     );
   }
 
+  const fallbackPlot = plots[0]?.slug ?? "general";
+
   return (
     <form
       onSubmit={onSubmit}
       className={`rounded-2xl bg-white ring-1 ring-black/5 ${compact ? "p-6" : "p-8"}`}
     >
-      {!compact && (
-        <h3 className="text-xl font-semibold mb-1">Book a Site Visit</h3>
-      )}
+      {!compact && <h3 className="text-xl font-semibold mb-1">Book a Site Visit</h3>}
       {!compact && (
         <p className="text-sm text-zinc-500 mb-6">
           Walk the land with a coordinator. Free, no obligation.
@@ -98,10 +99,10 @@ export function BookingForm({
             <select
               name="plot_interest"
               required
-              defaultValue={defaultPlot ?? PLOTS[0].slug}
+              defaultValue={defaultPlot ?? fallbackPlot}
               className={inputCls}
             >
-              {PLOTS.map((p) => (
+              {plots.map((p) => (
                 <option key={p.slug} value={p.slug}>
                   {p.name}
                 </option>

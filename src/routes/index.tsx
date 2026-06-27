@@ -2,8 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { BookingForm } from "@/components/site/BookingForm";
-import { PlotCard } from "@/components/site/PlotCard";
-import { COMPANY, PLOTS, projectShowcase } from "@/lib/site-data";
+import {
+  usePlots,
+  useCompany,
+  plotImageUrl,
+  COMPANY_FALLBACK,
+} from "@/lib/site-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,7 +29,9 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const featured = PLOTS.slice(0, 4);
+  const { data: plots = [] } = usePlots();
+  const { data: company = COMPANY_FALLBACK } = useCompany();
+  const featured = plots.slice(0, 4);
   const main = featured[0];
   const rest = featured.slice(1);
 
@@ -42,9 +48,7 @@ function HomePage() {
               Find your ground in the heart of the valley.
             </h1>
             <p className="mt-6 max-w-[58ch] text-base sm:text-lg text-zinc-600 text-pretty">
-              Premium residential plots designed for generational growth.
-              Infrastructure-ready land parcels with clear titles and sustainable
-              planning — across Bengaluru's fastest-growing corridors.
+              {company.tagline || "Premium residential plots designed for generational growth."}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -62,7 +66,7 @@ function HomePage() {
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
-              {COMPANY.stats.map((s) => (
+              {company.stats.map((s) => (
                 <div key={s.label}>
                   <div className="text-2xl font-semibold text-navy">{s.value}</div>
                   <div className="mt-1 text-[11px] font-medium uppercase tracking-wider text-zinc-500">
@@ -80,93 +84,88 @@ function HomePage() {
       </section>
 
       {/* FEATURED PLOTS — Bento */}
-      <section className="bg-zinc-100 py-20 md:py-24">
-        <div className="container-page">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <span className="text-xs font-semibold text-brand uppercase tracking-widest">
-                Featured Listings
-              </span>
-              <h2 className="mt-2 text-3xl md:text-4xl font-semibold text-zinc-900">
-                Active Land Parcels
-              </h2>
-            </div>
-            <Link
-              to="/plots"
-              className="hidden sm:inline-flex text-sm font-medium text-brand hover:underline underline-offset-4"
-            >
-              View all {PLOTS.length} plots →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
-            {/* Large hero plot */}
-            <article className="md:col-span-2 md:row-span-2 group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition hover:ring-brand/30">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={main.image} alt={main.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <span className="absolute left-4 top-4 rounded bg-navy/10 px-2 py-1 text-[10px] font-bold tracking-wider text-navy backdrop-blur">
-                  {main.tag}
+      {main && (
+        <section className="bg-zinc-100 py-20 md:py-24">
+          <div className="container-page">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <span className="text-xs font-semibold text-brand uppercase tracking-widest">
+                  Featured Listings
                 </span>
+                <h2 className="mt-2 text-3xl md:text-4xl font-semibold text-zinc-900">
+                  Active Land Parcels
+                </h2>
               </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-xl font-semibold text-zinc-900">{main.name}</h3>
-                <p className="mt-1 flex items-center gap-1.5 text-sm text-zinc-500">
-                  <MapPin className="size-3.5" /> {main.location}
-                </p>
-                <p className="mt-4 text-sm text-zinc-600 text-pretty">{main.description}</p>
-                <div className="mt-auto flex items-center justify-between pt-6 border-t border-black/5">
-                  <span className="text-lg font-semibold text-navy">{main.price}</span>
-                  <Link
-                    to="/book"
-                    search={{ plot: main.slug }}
-                    className="inline-flex items-center gap-1 text-sm font-medium text-brand"
-                  >
-                    Book visit <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-              </div>
-            </article>
-
-            {/* Horizontal card */}
-            <article className="md:col-span-2 group flex gap-4 overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-black/5 transition hover:ring-brand/30">
-              <div className="h-full w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
-                <img src={rest[0].image} alt={rest[0].name} className="h-full w-full object-cover" />
-              </div>
-              <div className="flex flex-1 flex-col justify-between py-1">
-                <div>
-                  <h4 className="text-base font-semibold text-zinc-900">{rest[0].name}</h4>
-                  <p className="text-xs text-zinc-500">{rest[0].area} · {rest[0].facing}</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-base font-semibold text-navy">{rest[0].price}</span>
-                  <Link to="/plots" className="text-xs font-medium text-brand">View →</Link>
-                </div>
-              </div>
-            </article>
-
-            {/* Two small cards */}
-            {rest.slice(1).map((plot) => (
-              <article
-                key={plot.slug}
-                className="group flex flex-col overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-black/5 transition hover:ring-brand/30"
+              <Link
+                to="/plots"
+                className="hidden sm:inline-flex text-sm font-medium text-brand hover:underline underline-offset-4"
               >
-                <div className="aspect-video w-full overflow-hidden rounded-lg bg-zinc-100 mb-3">
-                  <img src={plot.image} alt={plot.name} className="h-full w-full object-cover" />
-                </div>
-                <h4 className="text-sm font-semibold text-zinc-900">{plot.name}</h4>
-                <p className="text-xs text-zinc-500">{plot.area} · {plot.facing}</p>
-                <span className="mt-auto pt-2 text-sm font-semibold text-navy">{plot.price}</span>
-              </article>
-            ))}
-          </div>
+                View all {plots.length} plots →
+              </Link>
+            </div>
 
-          <div className="sm:hidden mt-6 text-center">
-            <Link to="/plots" className="text-sm font-medium text-brand">
-              View all {PLOTS.length} plots →
-            </Link>
+            <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
+              <article className="md:col-span-2 md:row-span-2 group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition hover:ring-brand/30">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img src={plotImageUrl(main, 0)} alt={main.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <span className="absolute left-4 top-4 rounded bg-navy/10 px-2 py-1 text-[10px] font-bold tracking-wider text-navy backdrop-blur">
+                    {main.tag}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-xl font-semibold text-zinc-900">{main.name}</h3>
+                  <p className="mt-1 flex items-center gap-1.5 text-sm text-zinc-500">
+                    <MapPin className="size-3.5" /> {main.location}
+                  </p>
+                  <p className="mt-4 text-sm text-zinc-600 text-pretty">{main.description}</p>
+                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-black/5">
+                    <span className="text-lg font-semibold text-navy">{main.price}</span>
+                    <Link
+                      to="/book"
+                      search={{ plot: main.slug }}
+                      className="inline-flex items-center gap-1 text-sm font-medium text-brand"
+                    >
+                      Book visit <ArrowRight className="size-4" />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+
+              {rest[0] && (
+                <article className="md:col-span-2 group flex gap-4 overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-black/5 transition hover:ring-brand/30">
+                  <div className="h-full w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+                    <img src={plotImageUrl(rest[0], 1)} alt={rest[0].name} className="h-full w-full object-cover" />
+                  </div>
+                  <div className="flex flex-1 flex-col justify-between py-1">
+                    <div>
+                      <h4 className="text-base font-semibold text-zinc-900">{rest[0].name}</h4>
+                      <p className="text-xs text-zinc-500">{rest[0].area} · {rest[0].facing}</p>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-base font-semibold text-navy">{rest[0].price}</span>
+                      <Link to="/plots" className="text-xs font-medium text-brand">View →</Link>
+                    </div>
+                  </div>
+                </article>
+              )}
+
+              {rest.slice(1).map((plot, i) => (
+                <article
+                  key={plot.slug}
+                  className="group flex flex-col overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-black/5 transition hover:ring-brand/30"
+                >
+                  <div className="aspect-video w-full overflow-hidden rounded-lg bg-zinc-100 mb-3">
+                    <img src={plotImageUrl(plot, i + 2)} alt={plot.name} className="h-full w-full object-cover" />
+                  </div>
+                  <h4 className="text-sm font-semibold text-zinc-900">{plot.name}</h4>
+                  <p className="text-xs text-zinc-500">{plot.area} · {plot.facing}</p>
+                  <span className="mt-auto pt-2 text-sm font-semibold text-navy">{plot.price}</span>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* TRUST STRIP */}
       <section className="bg-white py-16">
@@ -193,40 +192,37 @@ function HomePage() {
               About the developer
             </span>
             <h2 className="mt-3 text-3xl md:text-4xl font-semibold leading-tight">
-              Crafting legacies since 1998.
+              {company.name}
             </h2>
             <p className="mt-6 max-w-[56ch] text-zinc-300 text-pretty">
-              Random Developers is more than a real estate firm. We are curators of
-              space, focused on identifying high-growth land corridors and
-              transforming them into organized residential communities.
+              {company.about_text ||
+                "We curate land in high-growth corridors and transform it into organized residential communities."}
             </p>
             <div className="mt-10 grid grid-cols-3 gap-8 max-w-md">
-              {COMPANY.stats.map((s) => (
+              {company.stats.map((s) => (
                 <div key={s.label}>
-                  <div className="text-3xl font-semibold text-brand">{s.value}</div>
-                  <div className="mt-1 text-[11px] font-medium uppercase tracking-wider text-zinc-400">
+                  <div className="text-3xl font-semibold">{s.value}</div>
+                  <div className="mt-1 text-[11px] uppercase tracking-wider text-zinc-400">
                     {s.label}
                   </div>
                 </div>
               ))}
             </div>
-            <div className="mt-10">
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-medium text-white ring-1 ring-brand hover:brightness-110"
-              >
-                Read our story <ArrowRight className="size-4" />
-              </Link>
-            </div>
+            <Link
+              to="/about"
+              className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
+            >
+              Read our full story <ArrowRight className="size-4" />
+            </Link>
           </div>
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl ring-1 ring-white/10">
+          <div className="rounded-2xl overflow-hidden ring-1 ring-white/10">
+            {plots[0] && (
               <img
-                src={projectShowcase}
-                alt="Aerial view of completed Random Developers project"
-                className="aspect-[4/3] w-full object-cover"
+                src={plotImageUrl(plots[0], 0)}
+                alt={plots[0].name}
+                className="w-full aspect-[4/3] object-cover"
               />
-            </div>
+            )}
           </div>
         </div>
       </section>
