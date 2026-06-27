@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { PageShell } from "@/components/site/PageShell";
 import { BookingForm } from "@/components/site/BookingForm";
-import { COMPANY } from "@/lib/site-data";
+import { COMPANY_FALLBACK, useCompany } from "@/lib/site-content";
 import { Phone, Mail, MapPin, CheckCircle2 } from "lucide-react";
 
 const searchSchema = z.object({
@@ -31,6 +31,7 @@ export const Route = createFileRoute("/book")({
 
 function BookPage() {
   const { plot } = Route.useSearch();
+  const { data: company = COMPANY_FALLBACK } = useCompany();
 
   return (
     <PageShell>
@@ -76,13 +77,13 @@ function BookPage() {
                 Or call us directly
               </h4>
               <div className="flex items-center gap-3 text-sm text-zinc-700">
-                <Phone className="size-4 text-brand" /> {COMPANY.phone}
+                <Phone className="size-4 text-brand" /> {company.phone}
               </div>
               <div className="flex items-center gap-3 text-sm text-zinc-700">
-                <Mail className="size-4 text-brand" /> {COMPANY.email}
+                <Mail className="size-4 text-brand" /> {company.email}
               </div>
               <div className="flex items-start gap-3 text-sm text-zinc-700">
-                <MapPin className="size-4 text-brand mt-0.5" /> {COMPANY.address}
+                <MapPin className="size-4 text-brand mt-0.5" /> {company.address}
               </div>
             </div>
           </div>

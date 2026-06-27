@@ -50,15 +50,168 @@ export type Database = {
         }
         Relationships: []
       }
+      company_info: {
+        Row: {
+          about_text: string
+          address: string
+          email: string
+          id: number
+          name: string
+          phone: string
+          stats: Json
+          tagline: string
+          updated_at: string
+        }
+        Insert: {
+          about_text?: string
+          address?: string
+          email?: string
+          id?: number
+          name?: string
+          phone?: string
+          stats?: Json
+          tagline?: string
+          updated_at?: string
+        }
+        Update: {
+          about_text?: string
+          address?: string
+          email?: string
+          id?: number
+          name?: string
+          phone?: string
+          stats?: Json
+          tagline?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      plots: {
+        Row: {
+          area: string
+          created_at: string
+          description: string
+          facing: string
+          id: string
+          image_url: string
+          location: string
+          name: string
+          price: string
+          slug: string
+          sort_order: number
+          tag: string
+          updated_at: string
+        }
+        Insert: {
+          area?: string
+          created_at?: string
+          description?: string
+          facing?: string
+          id?: string
+          image_url?: string
+          location?: string
+          name: string
+          price?: string
+          slug: string
+          sort_order?: number
+          tag?: string
+          updated_at?: string
+        }
+        Update: {
+          area?: string
+          created_at?: string
+          description?: string
+          facing?: string
+          id?: string
+          image_url?: string
+          location?: string
+          name?: string
+          price?: string
+          slug?: string
+          sort_order?: number
+          tag?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          blurb: string
+          created_at: string
+          id: string
+          image_url: string
+          name: string
+          slug: string
+          sort_order: number
+          status: string
+          units: string
+          updated_at: string
+          year: string
+        }
+        Insert: {
+          blurb?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          name: string
+          slug: string
+          sort_order?: number
+          status?: string
+          units?: string
+          updated_at?: string
+          year?: string
+        }
+        Update: {
+          blurb?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          name?: string
+          slug?: string
+          sort_order?: number
+          status?: string
+          units?: string
+          updated_at?: string
+          year?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -185,6 +338,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

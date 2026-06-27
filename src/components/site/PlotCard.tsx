@@ -1,26 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
-import type { Plot } from "@/lib/site-data";
+import { plotImageUrl, plotTagClass, type Plot } from "@/lib/site-content";
 
-const tagStyles: Record<Plot["tag"], string> = {
-  PREMIUM: "bg-navy/10 text-navy",
-  "FAST SELLING": "bg-orange-100 text-orange-700",
-  AVAILABLE: "bg-green-100 text-green-700",
-  "NEW LAUNCH": "bg-brand/10 text-brand",
-};
-
-export function PlotCard({ plot }: { plot: Plot }) {
+export function PlotCard({ plot, index = 0 }: { plot: Plot; index?: number }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition hover:ring-brand/30 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
         <img
-          src={plot.image}
+          src={plotImageUrl(plot, index)}
           alt={plot.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <span
-          className={`absolute left-4 top-4 rounded px-2 py-1 text-[10px] font-bold tracking-wider ${tagStyles[plot.tag]}`}
+          className={`absolute left-4 top-4 rounded px-2 py-1 text-[10px] font-bold tracking-wider ${plotTagClass(plot.tag)}`}
         >
           {plot.tag}
         </span>

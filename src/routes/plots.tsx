@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site/PageShell";
 import { PlotCard } from "@/components/site/PlotCard";
-import { PLOTS } from "@/lib/site-data";
+import { usePlots } from "@/lib/site-content";
 
 export const Route = createFileRoute("/plots")({
   head: () => ({
@@ -23,6 +23,7 @@ export const Route = createFileRoute("/plots")({
 });
 
 function PlotsPage() {
+  const { data: plots = [], isLoading } = usePlots();
   return (
     <PageShell>
       <section className="bg-surface py-16 md:py-20 border-b border-black/5">
@@ -42,11 +43,19 @@ function PlotsPage() {
 
       <section className="bg-zinc-100 py-16 md:py-20">
         <div className="container-page">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PLOTS.map((plot) => (
-              <PlotCard key={plot.slug} plot={plot} />
-            ))}
-          </div>
+          {isLoading ? (
+            <p className="text-center text-zinc-500">Loading plots…</p>
+          ) : plots.length === 0 ? (
+            <p className="text-center text-zinc-500">
+              No plots listed yet. Check back soon.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {plots.map((plot, i) => (
+                <PlotCard key={plot.slug} plot={plot} index={i} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </PageShell>
