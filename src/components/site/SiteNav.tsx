@@ -3,6 +3,7 @@ import { CalendarDays, Menu, X, LogOut, Settings } from "lucide-react";
 import { useState } from "react";
 import { useIsAdmin } from "@/lib/use-auth";
 import { supabase } from "@/integrations/supabase/client";
+import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
 const links = [
   { to: "/", label: "Home" },
