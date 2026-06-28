@@ -39,7 +39,7 @@ function AdminCompanyPage() {
       const { error } = await supabase.from("company_info").update({
         name: form.name, tagline: form.tagline, phone: form.phone, email: form.email,
         address: form.address, stats: form.stats, about_text: form.about_text,
-        logo_url: form.logo_url,
+        logo_url: form.logo_url, name_segments: form.name_segments ?? [],
       }).eq("id", 1);
       if (error) throw error;
       toast.success("Company info saved");
@@ -73,6 +73,59 @@ function AdminCompanyPage() {
           <div className="mt-1"><ImageUploader value={form.logo_url ?? ""} onChange={(v) => set("logo_url", v)} folder="misc" /></div>
         </div>
         <div><label className={labelCls}>Company name</label><input className={inputCls} value={form.name} onChange={(e) => set("name", e.target.value)} /></div>
+
+        <div className="rounded-lg bg-zinc-50 p-3 ring-1 ring-black/5">
+          <div className="flex items-center justify-between">
+            <label className={labelCls}>Name colors (optional)</label>
+            <button
+              type="button"
+              onClick={() => set("name_segments", [...(form.name_segments ?? []), { text: "", color: "#0066ff" }])}
+              className="inline-flex items-center gap-1 text-xs text-brand hover:underline"
+            ><Plus className="size-3.5" /> Add segment</button>
+          </div>
+          <p className="mt-1 text-xs text-zinc-500">Split the name into pieces and pick a color for each. Leave empty to show the plain name above.</p>
+          <div className="mt-2 space-y-2">
+            {(form.name_segments ?? []).map((seg, i) => (
+              <div key={i} className="flex gap-2 items-center">
+                <input
+                  className={`${inputCls} flex-1`}
+                  placeholder="e.g. R"
+                  value={seg.text}
+                  onChange={(e) => {
+                    const segs = [...(form.name_segments ?? [])];
+                    segs[i] = { ...segs[i], text: e.target.value };
+                    set("name_segments", segs);
+                  }}
+                />
+                <input
+                  type="color"
+                  className="h-9 w-12 rounded ring-1 ring-black/10 cursor-pointer bg-white"
+                  value={seg.color || "#000000"}
+                  onChange={(e) => {
+                    const segs = [...(form.name_segments ?? [])];
+                    segs[i] = { ...segs[i], color: e.target.value };
+                    set("name_segments", segs);
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => set("name_segments", (form.name_segments ?? []).filter((_, idx) => idx !== i))}
+                  className="px-2 text-red-600"
+                ><Trash2 className="size-4" /></button>
+              </div>
+            ))}
+            {(form.name_segments ?? []).length > 0 && (
+              <div className="pt-1 text-sm">
+                Preview:{" "}
+                <span className="font-semibold tracking-tight">
+                  {form.name_segments.map((s, i) => (
+                    <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
+                  ))}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
         <div><label className={labelCls}>Tagline / headline</label><input className={inputCls} value={form.tagline} onChange={(e) => set("tagline", e.target.value)} /></div>
         <div><label className={labelCls}>About text</label><textarea rows={4} className={inputCls} value={form.about_text} onChange={(e) => set("about_text", e.target.value)} /></div>
         <div className="grid grid-cols-2 gap-4">

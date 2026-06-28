@@ -1,0 +1,1 @@
+ALTER TABLE public.company_info ADD COLUMN IF NOT EXISTS name_segments jsonb NOT NULL DEFAULT '[]'::jsonb;
