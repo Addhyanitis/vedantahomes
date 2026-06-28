@@ -147,4 +147,5 @@ export const COMPANY_FALLBACK: CompanyInfo = {
     { value: "18", label: "Projects Delivered" },
   ],
   about_text: "",
+  logo_url: "",
 };
