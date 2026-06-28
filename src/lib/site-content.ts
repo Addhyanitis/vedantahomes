@@ -43,6 +43,7 @@ export type CompanyInfo = {
   address: string;
   stats: { value: string; label: string }[];
   about_text: string;
+  logo_url: string;
 };
 
 const fallbackPlotImages = [
