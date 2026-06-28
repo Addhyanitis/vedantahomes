@@ -123,6 +123,7 @@ async function fetchCompany(): Promise<CompanyInfo> {
       stats: [],
       about_text: "",
       logo_url: "",
+      name_segments: [],
     }
   );
 }
@@ -151,4 +152,5 @@ export const COMPANY_FALLBACK: CompanyInfo = {
   ],
   about_text: "",
   logo_url: "",
+  name_segments: [],
 };
