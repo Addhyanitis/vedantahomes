@@ -3,6 +3,7 @@ import { CalendarDays, Menu, X, LogOut, Settings } from "lucide-react";
 import { useState } from "react";
 import { useIsAdmin } from "@/lib/use-auth";
 import { supabase } from "@/integrations/supabase/client";
+import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
 const links = [
   { to: "/", label: "Home" },
@@ -15,6 +16,9 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const { user, isAdmin } = useIsAdmin();
   const navigate = useNavigate();
+  const { data: company } = useCompany();
+  const c = company ?? COMPANY_FALLBACK;
+  const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -26,11 +30,15 @@ export function SiteNav() {
       <div className="container-page flex h-16 items-center justify-between">
         <div className="flex items-center gap-10">
           <Link to="/" className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
-              R
-            </span>
+            {c.logo_url ? (
+              <img src={c.logo_url} alt={`${c.name} logo`} className="h-8 w-8 rounded-md object-contain bg-white ring-1 ring-black/5" />
+            ) : (
+              <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
+                {initial}
+              </span>
+            )}
             <span className="text-lg font-semibold tracking-tight text-navy">
-              Random Developers
+              {c.name}
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-7">

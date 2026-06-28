@@ -43,6 +43,7 @@ export type CompanyInfo = {
   address: string;
   stats: { value: string; label: string }[];
   about_text: string;
+  logo_url: string;
 };
 
 const fallbackPlotImages = [
@@ -118,6 +119,7 @@ async function fetchCompany(): Promise<CompanyInfo> {
       address: "",
       stats: [],
       about_text: "",
+      logo_url: "",
     }
   );
 }
@@ -145,4 +147,5 @@ export const COMPANY_FALLBACK: CompanyInfo = {
     { value: "18", label: "Projects Delivered" },
   ],
   about_text: "",
+  logo_url: "",
 };
