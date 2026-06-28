@@ -16,6 +16,9 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const { user, isAdmin } = useIsAdmin();
   const navigate = useNavigate();
+  const { data: company } = useCompany();
+  const c = company ?? COMPANY_FALLBACK;
+  const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
 
   async function signOut() {
     await supabase.auth.signOut();
