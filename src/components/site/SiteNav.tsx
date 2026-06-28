@@ -38,7 +38,11 @@ export function SiteNav() {
               </span>
             )}
             <span className="text-lg font-semibold tracking-tight text-navy">
-              {c.name}
+              {c.name_segments && c.name_segments.length > 0
+                ? c.name_segments.map((s, i) => (
+                    <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
+                  ))
+                : c.name}
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-7">
