@@ -34,6 +34,8 @@ export type Project = {
   sort_order: number;
 };
 
+export type NameSegment = { text: string; color: string };
+
 export type CompanyInfo = {
   id: number;
   name: string;
@@ -44,6 +46,7 @@ export type CompanyInfo = {
   stats: { value: string; label: string }[];
   about_text: string;
   logo_url: string;
+  name_segments: NameSegment[];
 };
 
 const fallbackPlotImages = [
