@@ -58,6 +58,7 @@ export type Database = {
           id: number
           logo_url: string
           name: string
+          name_segments: Json
           phone: string
           stats: Json
           tagline: string
@@ -70,6 +71,7 @@ export type Database = {
           id?: number
           logo_url?: string
           name?: string
+          name_segments?: Json
           phone?: string
           stats?: Json
           tagline?: string
@@ -82,6 +84,7 @@ export type Database = {
           id?: number
           logo_url?: string
           name?: string
+          name_segments?: Json
           phone?: string
           stats?: Json
           tagline?: string
