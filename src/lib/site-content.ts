@@ -119,6 +119,7 @@ async function fetchCompany(): Promise<CompanyInfo> {
       address: "",
       stats: [],
       about_text: "",
+      logo_url: "",
     }
   );
 }
