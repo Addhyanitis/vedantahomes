@@ -68,6 +68,10 @@ function AdminCompanyPage() {
       <h2 className="text-xl font-semibold">Company Info</h2>
 
       <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 space-y-4">
+        <div>
+          <label className={labelCls}>Company logo</label>
+          <div className="mt-1"><ImageUploader value={form.logo_url ?? ""} onChange={(v) => set("logo_url", v)} folder="misc" /></div>
+        </div>
         <div><label className={labelCls}>Company name</label><input className={inputCls} value={form.name} onChange={(e) => set("name", e.target.value)} /></div>
         <div><label className={labelCls}>Tagline / headline</label><input className={inputCls} value={form.tagline} onChange={(e) => set("tagline", e.target.value)} /></div>
         <div><label className={labelCls}>About text</label><textarea rows={4} className={inputCls} value={form.about_text} onChange={(e) => set("about_text", e.target.value)} /></div>
