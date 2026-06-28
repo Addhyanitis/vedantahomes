@@ -56,6 +56,7 @@ export type Database = {
           address: string
           email: string
           id: number
+          logo_url: string
           name: string
           phone: string
           stats: Json
@@ -67,6 +68,7 @@ export type Database = {
           address?: string
           email?: string
           id?: number
+          logo_url?: string
           name?: string
           phone?: string
           stats?: Json
@@ -78,6 +80,7 @@ export type Database = {
           address?: string
           email?: string
           id?: number
+          logo_url?: string
           name?: string
           phone?: string
           stats?: Json
