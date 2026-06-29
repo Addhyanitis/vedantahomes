@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, MapPin, ShieldCheck, Sparkles, Phone, Mail } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { BookingForm } from "@/components/site/BookingForm";
 import {
@@ -222,6 +222,50 @@ function HomePage() {
                 alt={plots[0].name}
                 className="w-full aspect-[4/3] object-cover"
               />
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT STRIP */}
+      <section className="bg-surface py-14 border-t border-black/5">
+        <div className="container-page">
+          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand">Get in touch</span>
+              <h2 className="mt-2 text-2xl md:text-3xl font-semibold text-zinc-900">Talk to our land advisors</h2>
+            </div>
+            <Link to="/book" className="text-sm font-medium text-brand hover:underline inline-flex items-center gap-1">
+              Or book a site visit <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {company.phone && (
+              <a href={`tel:${company.phone.replace(/\s+/g, "")}`} className="group flex items-start gap-4 rounded-2xl bg-white p-6 ring-1 ring-black/5 hover:ring-brand transition">
+                <span className="grid h-10 w-10 place-items-center rounded-md bg-brand/10 text-brand"><Phone className="size-5" /></span>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Call</div>
+                  <div className="mt-1 text-zinc-900 font-medium group-hover:text-brand">{company.phone}</div>
+                </div>
+              </a>
+            )}
+            {company.email && (
+              <a href={`mailto:${company.email}`} className="group flex items-start gap-4 rounded-2xl bg-white p-6 ring-1 ring-black/5 hover:ring-brand transition">
+                <span className="grid h-10 w-10 place-items-center rounded-md bg-brand/10 text-brand"><Mail className="size-5" /></span>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Email</div>
+                  <div className="mt-1 text-zinc-900 font-medium group-hover:text-brand break-all">{company.email}</div>
+                </div>
+              </a>
+            )}
+            {company.address && (
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(company.address)}`} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-4 rounded-2xl bg-white p-6 ring-1 ring-black/5 hover:ring-brand transition">
+                <span className="grid h-10 w-10 place-items-center rounded-md bg-brand/10 text-brand"><MapPin className="size-5" /></span>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Visit</div>
+                  <div className="mt-1 text-zinc-900 font-medium group-hover:text-brand">{company.address}</div>
+                </div>
+              </a>
             )}
           </div>
         </div>
