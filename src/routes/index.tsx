@@ -12,13 +12,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Random Developers — Premium Residential Plots in Bengaluru" },
+      { title: "Premium Residential Plots in Bengaluru" },
       {
         name: "description",
         content:
-          "RERA-approved residential plots, gated communities and farmland. Book a free guided site visit with Random Developers.",
+          "RERA-approved residential plots, gated communities and farmland. Book a free guided site visit.",
       },
-      { property: "og:title", content: "Random Developers — Premium Residential Plots" },
+      { property: "og:title", content: "Premium Residential Plots" },
       {
         property: "og:description",
         content: "Infrastructure-ready land parcels with clear titles.",

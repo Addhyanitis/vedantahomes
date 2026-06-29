@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageShell } from "@/components/site/PageShell";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in — Random Developers" }] }),
+  head: () => ({ meta: [{ title: "Sign in" }] }),
   component: AuthPage,
 });
 

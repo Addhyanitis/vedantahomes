@@ -5,13 +5,13 @@ import { projectImageUrl, useProjects } from "@/lib/site-content";
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects — Random Developers" },
+      { title: "Projects" },
       {
         name: "description",
         content:
-          "A portfolio of completed and ongoing developments by Random Developers.",
+          "A portfolio of our completed and ongoing developments.",
       },
-      { property: "og:title", content: "Projects — Random Developers" },
+      { property: "og:title", content: "Projects" },
       {
         property: "og:description",
         content: "Completed and ongoing real estate projects.",

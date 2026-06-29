@@ -76,14 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Random Developers — Premium Residential Plots & Land" },
+      { title: "Premium Residential Plots & Land" },
       {
         name: "description",
         content:
-          "Random Developers — RERA-approved residential plots, gated communities and farmland across southern India. Book a free site visit.",
+          "RERA-approved residential plots, gated communities and farmland across southern India. Book a free site visit.",
       },
-      { name: "author", content: "Random Developers" },
-      { property: "og:title", content: "Random Developers — Premium Residential Plots" },
+      { property: "og:title", content: "Premium Residential Plots" },
       {
         property: "og:description",
         content:

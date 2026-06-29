@@ -6,13 +6,13 @@ import { usePlots } from "@/lib/site-content";
 export const Route = createFileRoute("/plots")({
   head: () => ({
     meta: [
-      { title: "Plots & Lands — Random Developers" },
+      { title: "Plots & Lands" },
       {
         name: "description",
         content:
-          "Browse RERA-approved residential plots, villa land and farmland from Random Developers.",
+          "Browse RERA-approved residential plots, villa land and farmland.",
       },
-      { property: "og:title", content: "Plots & Lands — Random Developers" },
+      { property: "og:title", content: "Plots & Lands" },
       {
         property: "og:description",
         content: "Browse our current inventory of premium plots.",
