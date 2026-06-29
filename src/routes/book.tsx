@@ -76,15 +76,15 @@ function BookPage() {
               <h4 className="text-sm font-semibold uppercase tracking-widest text-zinc-900">
                 Or call us directly
               </h4>
-              <div className="flex items-center gap-3 text-sm text-zinc-700">
+              <a href={`tel:${company.phone.replace(/\s+/g, "")}`} className="flex items-center gap-3 text-sm text-zinc-700 hover:text-brand">
                 <Phone className="size-4 text-brand" /> {company.phone}
-              </div>
-              <div className="flex items-center gap-3 text-sm text-zinc-700">
+              </a>
+              <a href={`mailto:${company.email}`} className="flex items-center gap-3 text-sm text-zinc-700 hover:text-brand">
                 <Mail className="size-4 text-brand" /> {company.email}
-              </div>
-              <div className="flex items-start gap-3 text-sm text-zinc-700">
+              </a>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(company.address)}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-sm text-zinc-700 hover:text-brand">
                 <MapPin className="size-4 text-brand mt-0.5" /> {company.address}
-              </div>
+              </a>
             </div>
           </div>
 

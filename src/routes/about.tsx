@@ -78,9 +78,9 @@ function AboutPage() {
         <div className="container-page max-w-3xl">
           <h2 className="text-3xl font-semibold text-zinc-900">Get in touch</h2>
           <div className="mt-6 space-y-3 text-zinc-600">
-            <p><strong className="text-zinc-900">Phone:</strong> {company.phone}</p>
-            <p><strong className="text-zinc-900">Email:</strong> {company.email}</p>
-            <p><strong className="text-zinc-900">Address:</strong> {company.address}</p>
+            <p><strong className="text-zinc-900">Phone:</strong> <a href={`tel:${company.phone.replace(/\s+/g, "")}`} className="hover:text-brand">{company.phone}</a></p>
+            <p><strong className="text-zinc-900">Email:</strong> <a href={`mailto:${company.email}`} className="hover:text-brand">{company.email}</a></p>
+            <p><strong className="text-zinc-900">Address:</strong> <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(company.address)}`} target="_blank" rel="noopener noreferrer" className="hover:text-brand">{company.address}</a></p>
           </div>
           <Link
             to="/book"
