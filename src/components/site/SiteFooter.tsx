@@ -48,9 +48,9 @@ export function SiteFooter() {
                 Contact
               </h5>
               <ul className="space-y-2 text-sm text-zinc-500">
-                {c.phone && <li>{c.phone}</li>}
-                {c.email && <li>{c.email}</li>}
-                {c.address && <li className="max-w-[24ch]">{c.address}</li>}
+                {c.phone && <li><a href={`tel:${c.phone.replace(/\s+/g, "")}`} className="hover:text-brand">{c.phone}</a></li>}
+                {c.email && <li><a href={`mailto:${c.email}`} className="hover:text-brand">{c.email}</a></li>}
+                {c.address && <li className="max-w-[24ch]"><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}`} target="_blank" rel="noopener noreferrer" className="hover:text-brand">{c.address}</a></li>}
               </ul>
             </div>
             <div className="space-y-3">
