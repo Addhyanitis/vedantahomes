@@ -115,7 +115,7 @@ async function fetchCompany(): Promise<CompanyInfo> {
   return (
     c ?? {
       id: 1,
-      name: "Random Developers",
+      name: "",
       tagline: "",
       phone: "",
       email: "",
@@ -140,16 +140,12 @@ export function useCompany() {
 
 export const COMPANY_FALLBACK: CompanyInfo = {
   id: 1,
-  name: "Random Developers",
-  tagline: "Premium land. Generational ground.",
-  phone: "+91 98765 43210",
-  email: "hello@randomdevelopers.in",
-  address: "12th Floor, Skyline Tower, MG Road, Bengaluru 560001",
-  stats: [
-    { value: "25+", label: "Years Experience" },
-    { value: "4.2k", label: "Happy Families" },
-    { value: "18", label: "Projects Delivered" },
-  ],
+  name: "",
+  tagline: "",
+  phone: "",
+  email: "",
+  address: "",
+  stats: [],
   about_text: "",
   logo_url: "",
   name_segments: [],

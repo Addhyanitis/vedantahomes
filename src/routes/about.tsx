@@ -11,13 +11,13 @@ import { ArrowRight, ShieldCheck, Award, Users } from "lucide-react";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Random Developers" },
+      { title: "About Us" },
       {
         name: "description",
         content:
-          "Random Developers has been shaping organized residential communities since 1998.",
+          "Shaping organized residential communities since 1998.",
       },
-      { property: "og:title", content: "About Random Developers" },
+      { property: "og:title", content: "About Us" },
       {
         property: "og:description",
         content: "Years of land development experience across southern India.",

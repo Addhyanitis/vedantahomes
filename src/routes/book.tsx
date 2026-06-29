@@ -13,11 +13,11 @@ export const Route = createFileRoute("/book")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Book a Site Visit — Random Developers" },
+      { title: "Book a Site Visit" },
       {
         name: "description",
         content:
-          "Schedule a free guided site visit with Random Developers. Walk the land with an expert.",
+          "Schedule a free guided site visit. Walk the land with an expert.",
       },
       { property: "og:title", content: "Book a Site Visit" },
       {
