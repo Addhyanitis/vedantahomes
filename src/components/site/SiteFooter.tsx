@@ -1,24 +1,35 @@
 import { Link } from "@tanstack/react-router";
-import { COMPANY } from "@/lib/site-data";
+import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
 export function SiteFooter() {
+  const { data: company } = useCompany();
+  const c = company ?? COMPANY_FALLBACK;
+  const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
+
   return (
     <footer className="border-t border-black/5 bg-surface py-14">
       <div className="container-page">
         <div className="flex flex-col gap-12 md:flex-row md:justify-between">
           <div className="max-w-sm">
             <div className="flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
-                R
-              </span>
+              {c.logo_url ? (
+                <img src={c.logo_url} alt={`${c.name} logo`} className="h-8 w-8 rounded-md object-contain bg-white ring-1 ring-black/5" />
+              ) : (
+                <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
+                  {initial}
+                </span>
+              )}
               <span className="text-lg font-semibold tracking-tight text-navy">
-                {COMPANY.name}
+                {c.name_segments && c.name_segments.length > 0
+                  ? c.name_segments.map((s, i) => (
+                      <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
+                    ))
+                  : c.name}
               </span>
             </div>
-            <p className="mt-4 text-sm text-zinc-500 text-pretty">
-              {COMPANY.tagline} Building organized residential communities across
-              southern India since 1998.
-            </p>
+            {c.tagline && (
+              <p className="mt-4 text-sm text-zinc-500 text-pretty">{c.tagline}</p>
+            )}
           </div>
           <div className="grid grid-cols-2 gap-12 sm:grid-cols-3">
             <div className="space-y-3">
@@ -37,9 +48,9 @@ export function SiteFooter() {
                 Contact
               </h5>
               <ul className="space-y-2 text-sm text-zinc-500">
-                <li>{COMPANY.phone}</li>
-                <li>{COMPANY.email}</li>
-                <li className="max-w-[24ch]">{COMPANY.address}</li>
+                {c.phone && <li>{c.phone}</li>}
+                {c.email && <li>{c.email}</li>}
+                {c.address && <li className="max-w-[24ch]">{c.address}</li>}
               </ul>
             </div>
             <div className="space-y-3">
@@ -56,7 +67,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-14 pt-6 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-xs text-zinc-400">
-            © {new Date().getFullYear()} {COMPANY.name} Pvt Ltd. All plots are RERA approved.
+            © {new Date().getFullYear()} {c.name}. All plots are RERA approved.
           </p>
           <p className="text-xs text-zinc-400">
             Crafted for families. Engineered for legacy.
