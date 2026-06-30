@@ -38,6 +38,7 @@ export function ScrollVideoStory() {
     let raf = 0;
     let targetTime = 0;
     let smoothTime = video.currentTime;
+    let lastApplied = -1;
 
     const computeTarget = () => {
       const rect = el.getBoundingClientRect();
@@ -49,13 +50,11 @@ export function ScrollVideoStory() {
     };
 
     const tick = () => {
-      // ease smoothTime toward targetTime so we don't seek every frame
-      smoothTime += (targetTime - smoothTime) * 0.15;
-      if (Math.abs(video.currentTime - smoothTime) > 0.04) {
+      smoothTime += (targetTime - smoothTime) * 0.08;
+      if (Math.abs(smoothTime - lastApplied) > 0.08) {
         try {
-          // @ts-ignore fastSeek isn't in every TS lib version
-          if (typeof video.fastSeek === "function") video.fastSeek(smoothTime);
-          else video.currentTime = smoothTime;
+          video.currentTime = smoothTime;
+          lastApplied = smoothTime;
         } catch {}
       }
       raf = requestAnimationFrame(tick);
@@ -83,7 +82,7 @@ export function ScrollVideoStory() {
     <section
       ref={wrapRef}
       className="relative bg-navy text-white"
-      style={{ height: "320vh" }}
+      style={{ height: "220vh" }}
       aria-label="From land to home"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
