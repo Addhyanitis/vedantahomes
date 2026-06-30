@@ -19,42 +19,58 @@ export function ScrollVideoStory() {
     if (!video) return;
     video.pause();
 
-    const onMeta = () => setReady(true);
-    if (video.readyState >= 1) setReady(true);
-    video.addEventListener("loadedmetadata", onMeta);
-    return () => video.removeEventListener("loadedmetadata", onMeta);
+    const onReady = () => setReady(true);
+    if (video.readyState >= 2) setReady(true);
+    video.addEventListener("loadedmetadata", onReady);
+    video.addEventListener("loadeddata", onReady);
+    return () => {
+      video.removeEventListener("loadedmetadata", onReady);
+      video.removeEventListener("loadeddata", onReady);
+    };
   }, []);
 
   useEffect(() => {
     if (!ready) return;
+    const video = videoRef.current;
+    const el = wrapRef.current;
+    if (!video || !el) return;
+
     let raf = 0;
-    const update = () => {
-      const el = wrapRef.current;
-      const video = videoRef.current;
-      if (!el || !video || !video.duration) return;
+    let targetTime = 0;
+    let smoothTime = video.currentTime;
+
+    const computeTarget = () => {
       const rect = el.getBoundingClientRect();
       const total = rect.height - window.innerHeight;
       const scrolled = Math.min(Math.max(-rect.top, 0), total);
       const p = total > 0 ? scrolled / total : 0;
       setProgress(p);
-      const target = p * video.duration;
-      if (Math.abs(video.currentTime - target) > 0.03) {
+      targetTime = p * (video.duration || 0);
+    };
+
+    const tick = () => {
+      // ease smoothTime toward targetTime so we don't seek every frame
+      smoothTime += (targetTime - smoothTime) * 0.15;
+      if (Math.abs(video.currentTime - smoothTime) > 0.04) {
         try {
-          video.currentTime = target;
+          // @ts-ignore fastSeek isn't in every TS lib version
+          if (typeof video.fastSeek === "function") video.fastSeek(smoothTime);
+          else video.currentTime = smoothTime;
         } catch {}
       }
+      raf = requestAnimationFrame(tick);
     };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
-    };
-    update();
+
+    const onScroll = () => computeTarget();
+    computeTarget();
+    smoothTime = targetTime;
+    raf = requestAnimationFrame(tick);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      cancelAnimationFrame(raf);
     };
   }, [ready]);
 
