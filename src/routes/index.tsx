@@ -168,6 +168,9 @@ function HomePage() {
         </section>
       )}
 
+      {/* SCROLL VIDEO STORY */}
+      <ScrollVideoStory />
+
       {/* TRUST STRIP */}
       <section className="bg-white py-16">
         <div className="container-page grid grid-cols-1 sm:grid-cols-3 gap-6">
