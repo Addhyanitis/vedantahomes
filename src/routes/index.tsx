@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { BookingForm } from "@/components/site/BookingForm";
+import { ScrollVideoStory } from "@/components/site/ScrollVideoStory";
 import {
   usePlots,
   useCompany,
@@ -166,6 +167,9 @@ function HomePage() {
           </div>
         </section>
       )}
+
+      {/* SCROLL VIDEO STORY */}
+      <ScrollVideoStory />
 
       {/* TRUST STRIP */}
       <section className="bg-white py-16">
