@@ -82,7 +82,7 @@ export function ScrollVideoStory() {
     <section
       ref={wrapRef}
       className="relative bg-navy text-white"
-      style={{ height: "320vh" }}
+      style={{ height: "220vh" }}
       aria-label="From land to home"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
