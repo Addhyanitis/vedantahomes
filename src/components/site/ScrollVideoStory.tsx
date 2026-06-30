@@ -77,8 +77,6 @@ export function ScrollVideoStory() {
           muted
           playsInline
           preload="auto"
-          // @ts-expect-error - iOS scrubbing hint
-          disableRemotePlayback
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/30 to-navy/80" />
