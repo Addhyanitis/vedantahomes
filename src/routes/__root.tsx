@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "RERA-approved residential plots, gated communities and farmland across southern India. Book a free site visit.",
       },
-      { property: "og:title", content: "Premium Residential Plots" },
+      { property: "og:title", content: "Premium Residential Plots & Land" },
       {
         property: "og:description",
         content:
@@ -90,6 +90,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Premium Residential Plots & Land" },
+      { name: "description", content: "Azure Homes Showcase is a modern real estate developer website for displaying properties and managing client interactions." },
+      { property: "og:description", content: "Azure Homes Showcase is a modern real estate developer website for displaying properties and managing client interactions." },
+      { name: "twitter:description", content: "Azure Homes Showcase is a modern real estate developer website for displaying properties and managing client interactions." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1e8d25d1-92b2-42c6-b157-db7947b30234/id-preview-4d67a517--31959a6d-fea4-412c-b1ff-66ba84a4ccd1.lovable.app-1782920116784.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1e8d25d1-92b2-42c6-b157-db7947b30234/id-preview-4d67a517--31959a6d-fea4-412c-b1ff-66ba84a4ccd1.lovable.app-1782920116784.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
