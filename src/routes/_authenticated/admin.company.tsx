@@ -154,6 +154,19 @@ function AdminCompanyPage() {
         </div>
       </div>
 
+      <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 space-y-4">
+        <h3 className="font-semibold">Owner / Founder (shown on About page)</h3>
+        <div>
+          <label className={labelCls}>Owner photo</label>
+          <div className="mt-1"><ImageUploader value={form.owner_image_url ?? ""} onChange={(v) => set("owner_image_url", v)} folder="misc" /></div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelCls}>Owner name</label><input className={inputCls} value={form.owner_name ?? ""} onChange={(e) => set("owner_name", e.target.value)} /></div>
+          <div><label className={labelCls}>Title / role</label><input className={inputCls} placeholder="Founder & CEO" value={form.owner_title ?? ""} onChange={(e) => set("owner_title", e.target.value)} /></div>
+        </div>
+        <div><label className={labelCls}>Owner bio</label><textarea rows={5} className={inputCls} value={form.owner_bio ?? ""} onChange={(e) => set("owner_bio", e.target.value)} /></div>
+      </div>
+
       <div className="flex justify-end">
         <button onClick={save} disabled={saving} className="rounded-md bg-brand px-5 py-2.5 text-sm font-medium text-white hover:brightness-110 disabled:opacity-60">
           {saving ? "Saving…" : "Save changes"}
