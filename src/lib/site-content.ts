@@ -47,6 +47,10 @@ export type CompanyInfo = {
   about_text: string;
   logo_url: string;
   name_segments: NameSegment[];
+  owner_name: string;
+  owner_title: string;
+  owner_bio: string;
+  owner_image_url: string;
 };
 
 const fallbackPlotImages = [
@@ -124,6 +128,10 @@ async function fetchCompany(): Promise<CompanyInfo> {
       about_text: "",
       logo_url: "",
       name_segments: [],
+      owner_name: "",
+      owner_title: "",
+      owner_bio: "",
+      owner_image_url: "",
     }
   );
 }
@@ -149,4 +157,8 @@ export const COMPANY_FALLBACK: CompanyInfo = {
   about_text: "",
   logo_url: "",
   name_segments: [],
+  owner_name: "",
+  owner_title: "",
+  owner_bio: "",
+  owner_image_url: "",
 };

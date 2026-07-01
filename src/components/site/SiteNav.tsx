@@ -7,7 +7,7 @@ import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/plots", label: "Plots" },
+  { to: "/plots", label: "Spaces" },
   { to: "/projects", label: "Projects" },
   { to: "/about", label: "About" },
 ] as const;
