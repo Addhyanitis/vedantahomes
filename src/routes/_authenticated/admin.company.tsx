@@ -40,6 +40,8 @@ function AdminCompanyPage() {
         name: form.name, tagline: form.tagline, phone: form.phone, email: form.email,
         address: form.address, stats: form.stats, about_text: form.about_text,
         logo_url: form.logo_url, name_segments: form.name_segments ?? [],
+        owner_name: form.owner_name ?? "", owner_title: form.owner_title ?? "",
+        owner_bio: form.owner_bio ?? "", owner_image_url: form.owner_image_url ?? "",
       }).eq("id", 1);
       if (error) throw error;
       toast.success("Company info saved");
@@ -150,6 +152,19 @@ function AdminCompanyPage() {
           ))}
           {form.stats.length === 0 && <p className="text-xs text-zinc-500">No stats. Add up to 3.</p>}
         </div>
+      </div>
+
+      <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 space-y-4">
+        <h3 className="font-semibold">Owner / Founder (shown on About page)</h3>
+        <div>
+          <label className={labelCls}>Owner photo</label>
+          <div className="mt-1"><ImageUploader value={form.owner_image_url ?? ""} onChange={(v) => set("owner_image_url", v)} folder="misc" /></div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelCls}>Owner name</label><input className={inputCls} value={form.owner_name ?? ""} onChange={(e) => set("owner_name", e.target.value)} /></div>
+          <div><label className={labelCls}>Title / role</label><input className={inputCls} placeholder="Founder & CEO" value={form.owner_title ?? ""} onChange={(e) => set("owner_title", e.target.value)} /></div>
+        </div>
+        <div><label className={labelCls}>Owner bio</label><textarea rows={5} className={inputCls} value={form.owner_bio ?? ""} onChange={(e) => set("owner_bio", e.target.value)} /></div>
       </div>
 
       <div className="flex justify-end">
