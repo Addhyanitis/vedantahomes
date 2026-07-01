@@ -74,6 +74,36 @@ function AboutPage() {
         </div>
       </section>
 
+      {(company.owner_name || company.owner_bio || company.owner_image_url) && (
+        <section className="bg-surface py-16 md:py-24 border-b border-black/5">
+          <div className="container-page grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+            {company.owner_image_url && (
+              <div className="lg:col-span-2 overflow-hidden rounded-2xl ring-1 ring-black/5">
+                <img src={company.owner_image_url} alt={company.owner_name || "Owner"} className="aspect-square w-full object-cover" />
+              </div>
+            )}
+            <div className="lg:col-span-3">
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+                Meet the founder
+              </span>
+              {company.owner_name && (
+                <h2 className="mt-3 text-3xl md:text-4xl font-semibold text-zinc-900">
+                  {company.owner_name}
+                </h2>
+              )}
+              {company.owner_title && (
+                <p className="mt-1 text-sm font-medium text-navy">{company.owner_title}</p>
+              )}
+              {company.owner_bio && (
+                <p className="mt-6 text-zinc-600 text-lg text-pretty whitespace-pre-line">
+                  {company.owner_bio}
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="bg-surface py-20">
         <div className="container-page max-w-3xl">
           <h2 className="text-3xl font-semibold text-zinc-900">Get in touch</h2>
