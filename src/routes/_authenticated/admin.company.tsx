@@ -40,6 +40,8 @@ function AdminCompanyPage() {
         name: form.name, tagline: form.tagline, phone: form.phone, email: form.email,
         address: form.address, stats: form.stats, about_text: form.about_text,
         logo_url: form.logo_url, name_segments: form.name_segments ?? [],
+        owner_name: form.owner_name ?? "", owner_title: form.owner_title ?? "",
+        owner_bio: form.owner_bio ?? "", owner_image_url: form.owner_image_url ?? "",
       }).eq("id", 1);
       if (error) throw error;
       toast.success("Company info saved");
