@@ -5,12 +5,7 @@ import { useIsAdmin } from "@/lib/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/plots", label: "Spaces" },
-  { to: "/projects", label: "Projects" },
-  { to: "/about", label: "About" },
-] as const;
+const defaultLabels = { home: "Home", spaces: "Spaces", projects: "Projects", about: "About", book: "Book Site Visit" };
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
