@@ -37,10 +37,10 @@ export function SiteFooter() {
                 Explore
               </h5>
               <ul className="space-y-2 text-sm text-zinc-500">
-                <li><Link to="/plots" className="hover:text-brand">Spaces</Link></li>
-                <li><Link to="/projects" className="hover:text-brand">Projects</Link></li>
-                <li><Link to="/about" className="hover:text-brand">About</Link></li>
-                <li><Link to="/book" className="hover:text-brand">Book Visit</Link></li>
+                <li><Link to="/plots" className="hover:text-brand">{c.nav_labels?.spaces || "Spaces"}</Link></li>
+                <li><Link to="/projects" className="hover:text-brand">{c.nav_labels?.projects || "Projects"}</Link></li>
+                <li><Link to="/about" className="hover:text-brand">{c.nav_labels?.about || "About"}</Link></li>
+                <li><Link to="/book" className="hover:text-brand">{c.nav_labels?.book || "Book Visit"}</Link></li>
               </ul>
             </div>
             <div className="space-y-3">
