@@ -36,7 +36,7 @@ function PlotsPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-zinc-600 text-pretty">
             Hand-picked land parcels across Bengaluru's most promising growth
-            corridors. Every plot is RERA approved, title-verified and bank-loan ready.
+            corridors. Every plot is RERA approved, CREDAI member-developed, title-verified and bank-loan ready.
           </p>
         </div>
       </section>
