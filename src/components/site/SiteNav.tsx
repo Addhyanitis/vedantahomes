@@ -93,7 +93,7 @@ export function SiteNav() {
             className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-2 text-sm font-medium text-white ring-1 ring-brand transition hover:brightness-110"
           >
             <CalendarDays className="size-4" />
-            Book Site Visit
+            {bookLabel}
           </Link>
           <button
             className="md:hidden grid h-9 w-9 place-items-center rounded-md ring-1 ring-black/5"
