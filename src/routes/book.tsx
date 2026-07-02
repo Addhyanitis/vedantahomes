@@ -59,7 +59,7 @@ function BookPage() {
               <ul className="mt-4 space-y-3">
                 {[
                   "On-site documentation walk-through",
-                  "Title & RERA verification details",
+                  "Title, RERA & CREDAI membership verification details",
                   "Plot boundary demarcation",
                   "Bank-loan and EMI options",
                   "Future appreciation insights for the corridor",
