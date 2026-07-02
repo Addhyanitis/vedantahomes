@@ -187,7 +187,7 @@ function HomePage() {
       <section className="bg-white py-16">
         <div className="container-page grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
-            { icon: ShieldCheck, title: "RERA approved", text: "Every plot we sell is registered and title-verified." },
+            { icon: ShieldCheck, title: "RERA approved · CREDAI member", text: "Every plot is registered, title-verified and developed under CREDAI's code of conduct." },
             { icon: Sparkles, title: "Infrastructure ready", text: "40ft roads, drainage, utilities — done before handover." },
             { icon: MapPin, title: "High-growth corridors", text: "Located along Bengaluru's strongest appreciation belts." },
           ].map((f) => (
