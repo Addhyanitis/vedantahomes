@@ -59,6 +59,7 @@ export function SiteFooter() {
               </h5>
               <ul className="space-y-2 text-sm text-zinc-500">
                 <li>RERA Approved</li>
+                <li>CREDAI Member</li>
                 <li>Clear Titles</li>
                 <li>Bank Approved Loans</li>
               </ul>
