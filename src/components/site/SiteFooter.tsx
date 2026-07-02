@@ -68,7 +68,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-14 pt-6 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-xs text-zinc-400">
-            © {new Date().getFullYear()} {c.name}. All plots are RERA approved.
+            © {new Date().getFullYear()} {c.name}. RERA approved · CREDAI member.
           </p>
           <p className="text-xs text-zinc-400">
             Crafted for families. Engineered for legacy.
