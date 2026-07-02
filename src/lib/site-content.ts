@@ -141,6 +141,7 @@ async function fetchCompany(): Promise<CompanyInfo> {
       owner_title: "",
       owner_bio: "",
       owner_image_url: "",
+      nav_labels: {},
     }
   );
 }
