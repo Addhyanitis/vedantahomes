@@ -59,6 +59,7 @@ export type Database = {
           logo_url: string
           name: string
           name_segments: Json
+          nav_labels: Json
           owner_bio: string
           owner_image_url: string
           owner_name: string
@@ -76,6 +77,7 @@ export type Database = {
           logo_url?: string
           name?: string
           name_segments?: Json
+          nav_labels?: Json
           owner_bio?: string
           owner_image_url?: string
           owner_name?: string
@@ -93,6 +95,7 @@ export type Database = {
           logo_url?: string
           name?: string
           name_segments?: Json
+          nav_labels?: Json
           owner_bio?: string
           owner_image_url?: string
           owner_name?: string

@@ -42,6 +42,7 @@ function AdminCompanyPage() {
         logo_url: form.logo_url, name_segments: form.name_segments ?? [],
         owner_name: form.owner_name ?? "", owner_title: form.owner_title ?? "",
         owner_bio: form.owner_bio ?? "", owner_image_url: form.owner_image_url ?? "",
+        nav_labels: form.nav_labels ?? {},
       }).eq("id", 1);
       if (error) throw error;
       toast.success("Company info saved");
@@ -165,6 +166,30 @@ function AdminCompanyPage() {
           <div><label className={labelCls}>Title / role</label><input className={inputCls} placeholder="Founder & CEO" value={form.owner_title ?? ""} onChange={(e) => set("owner_title", e.target.value)} /></div>
         </div>
         <div><label className={labelCls}>Owner bio</label><textarea rows={5} className={inputCls} value={form.owner_bio ?? ""} onChange={(e) => set("owner_bio", e.target.value)} /></div>
+      </div>
+
+      <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 space-y-4">
+        <h3 className="font-semibold">Menu labels</h3>
+        <p className="text-xs text-zinc-500">Rename the navigation items shown in the header and footer. Leave blank to keep the default.</p>
+        <div className="grid grid-cols-2 gap-4">
+          {([
+            ["home", "Home"],
+            ["spaces", "Spaces"],
+            ["projects", "Projects"],
+            ["about", "About"],
+            ["book", "Book Site Visit"],
+          ] as const).map(([key, def]) => (
+            <div key={key}>
+              <label className={labelCls}>{def}</label>
+              <input
+                className={inputCls}
+                placeholder={def}
+                value={form.nav_labels?.[key] ?? ""}
+                onChange={(e) => set("nav_labels", { ...(form.nav_labels ?? {}), [key]: e.target.value })}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="flex justify-end">

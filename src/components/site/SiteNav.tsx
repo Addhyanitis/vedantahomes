@@ -5,12 +5,7 @@ import { useIsAdmin } from "@/lib/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/plots", label: "Spaces" },
-  { to: "/projects", label: "Projects" },
-  { to: "/about", label: "About" },
-] as const;
+const defaultLabels = { home: "Home", spaces: "Spaces", projects: "Projects", about: "About", book: "Book Site Visit" };
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
@@ -19,6 +14,14 @@ export function SiteNav() {
   const { data: company } = useCompany();
   const c = company ?? COMPANY_FALLBACK;
   const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
+  const nl = c.nav_labels ?? {};
+  const links = [
+    { to: "/" as const, label: nl.home || defaultLabels.home },
+    { to: "/plots" as const, label: nl.spaces || defaultLabels.spaces },
+    { to: "/projects" as const, label: nl.projects || defaultLabels.projects },
+    { to: "/about" as const, label: nl.about || defaultLabels.about },
+  ];
+  const bookLabel = nl.book || defaultLabels.book;
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -90,7 +93,7 @@ export function SiteNav() {
             className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-2 text-sm font-medium text-white ring-1 ring-brand transition hover:brightness-110"
           >
             <CalendarDays className="size-4" />
-            Book Site Visit
+            {bookLabel}
           </Link>
           <button
             className="md:hidden grid h-9 w-9 place-items-center rounded-md ring-1 ring-black/5"
@@ -135,7 +138,7 @@ export function SiteNav() {
               className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-md bg-brand px-3 py-2 text-sm font-medium text-white"
             >
               <CalendarDays className="size-4" />
-              Book Site Visit
+              {bookLabel}
             </Link>
           </div>
         </div>

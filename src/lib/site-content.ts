@@ -36,6 +36,14 @@ export type Project = {
 
 export type NameSegment = { text: string; color: string };
 
+export type NavLabels = {
+  home?: string;
+  spaces?: string;
+  projects?: string;
+  about?: string;
+  book?: string;
+};
+
 export type CompanyInfo = {
   id: number;
   name: string;
@@ -51,6 +59,7 @@ export type CompanyInfo = {
   owner_title: string;
   owner_bio: string;
   owner_image_url: string;
+  nav_labels: NavLabels;
 };
 
 const fallbackPlotImages = [
@@ -132,6 +141,7 @@ async function fetchCompany(): Promise<CompanyInfo> {
       owner_title: "",
       owner_bio: "",
       owner_image_url: "",
+      nav_labels: {},
     }
   );
 }
@@ -161,4 +171,5 @@ export const COMPANY_FALLBACK: CompanyInfo = {
   owner_title: "",
   owner_bio: "",
   owner_image_url: "",
+  nav_labels: {},
 };
