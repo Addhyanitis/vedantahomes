@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { BookingForm } from "@/components/site/BookingForm";
 import { ScrollVideoStory } from "@/components/site/ScrollVideoStory";
+import heroVideo from "@/assets/land-to-house.mp4.asset.json";
 import {
   usePlots,
   useCompany,
