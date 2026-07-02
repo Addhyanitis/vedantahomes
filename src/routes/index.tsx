@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { BookingForm } from "@/components/site/BookingForm";
 import { ScrollVideoStory } from "@/components/site/ScrollVideoStory";
+import heroVideo from "@/assets/land-to-house.mp4.asset.json";
 import {
   usePlots,
   useCompany,
@@ -40,10 +41,21 @@ function HomePage() {
     <PageShell>
       {/* HERO */}
       <section className="relative bg-surface py-16 md:py-24 overflow-hidden">
-        <div className="container-page grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <video
+          src={heroVideo.url}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface/70 via-surface/60 to-surface" />
+        <div className="relative container-page grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 animate-fade-up">
             <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand">
-              <Sparkles className="size-3.5" /> RERA Approved · Clear Titles
+              <Sparkles className="size-3.5" /> RERA Approved · CREDAI Member · Clear Titles
             </span>
             <h1 className="mt-5 text-4xl md:text-6xl font-semibold text-zinc-900 leading-[1.05] text-balance">
               Find your ground in the heart of the valley.
@@ -175,7 +187,7 @@ function HomePage() {
       <section className="bg-white py-16">
         <div className="container-page grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
-            { icon: ShieldCheck, title: "RERA approved", text: "Every plot we sell is registered and title-verified." },
+            { icon: ShieldCheck, title: "RERA approved · CREDAI member", text: "Every plot is registered, title-verified and developed under CREDAI's code of conduct." },
             { icon: Sparkles, title: "Infrastructure ready", text: "40ft roads, drainage, utilities — done before handover." },
             { icon: MapPin, title: "High-growth corridors", text: "Located along Bengaluru's strongest appreciation belts." },
           ].map((f) => (
