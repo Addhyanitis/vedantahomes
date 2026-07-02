@@ -14,6 +14,14 @@ export function SiteNav() {
   const { data: company } = useCompany();
   const c = company ?? COMPANY_FALLBACK;
   const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
+  const nl = c.nav_labels ?? {};
+  const links = [
+    { to: "/" as const, label: nl.home || defaultLabels.home },
+    { to: "/plots" as const, label: nl.spaces || defaultLabels.spaces },
+    { to: "/projects" as const, label: nl.projects || defaultLabels.projects },
+    { to: "/about" as const, label: nl.about || defaultLabels.about },
+  ];
+  const bookLabel = nl.book || defaultLabels.book;
 
   async function signOut() {
     await supabase.auth.signOut();
