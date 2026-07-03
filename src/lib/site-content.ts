@@ -145,6 +145,9 @@ async function fetchCompany(): Promise<CompanyInfo> {
       owner_bio: "",
       owner_image_url: "",
       nav_labels: {},
+      hero_video_url: "",
+      hero_poster_url: "",
+      hero_video_enabled: true,
     }
   );
 }
