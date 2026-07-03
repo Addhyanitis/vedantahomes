@@ -2,30 +2,39 @@ import { Link } from "@tanstack/react-router";
 import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
 export function SiteFooter() {
-  const { data: company } = useCompany();
+  const { data: company, isLoading } = useCompany();
   const c = company ?? COMPANY_FALLBACK;
-  const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
+  const initial = (c.name?.trim()?.[0] ?? "").toUpperCase();
 
   return (
     <footer className="border-t border-black/5 bg-surface py-14">
       <div className="container-page">
         <div className="flex flex-col gap-12 md:flex-row md:justify-between">
           <div className="max-w-sm">
-            <div className="flex items-center gap-2">
-              {c.logo_url ? (
-                <img src={c.logo_url} alt={`${c.name} logo`} className="h-8 w-8 rounded-md object-contain bg-white ring-1 ring-black/5" />
+            <div className="flex items-center gap-2 min-h-8">
+              {isLoading ? (
+                <>
+                  <span className="h-8 w-8 rounded-md bg-zinc-100 animate-pulse" />
+                  <span className="h-5 w-32 rounded bg-zinc-100 animate-pulse" />
+                </>
               ) : (
-                <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
-                  {initial}
-                </span>
+                <>
+                  {c.logo_url ? (
+                    <img src={c.logo_url} alt={`${c.name} logo`} className="h-8 w-8 rounded-md object-contain bg-white ring-1 ring-black/5" />
+                  ) : initial ? (
+                    <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
+                      {initial}
+                    </span>
+                  ) : null}
+                  <span className="text-lg font-semibold tracking-tight text-navy">
+                    {c.name_segments && c.name_segments.length > 0
+                      ? c.name_segments.map((s, i) => (
+                          <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
+                        ))
+                      : c.name}
+                  </span>
+                </>
               )}
-              <span className="text-lg font-semibold tracking-tight text-navy">
-                {c.name_segments && c.name_segments.length > 0
-                  ? c.name_segments.map((s, i) => (
-                      <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
-                    ))
-                  : c.name}
-              </span>
             </div>
             {c.tagline && (
               <p className="mt-4 text-sm text-zinc-500 text-pretty">{c.tagline}</p>
