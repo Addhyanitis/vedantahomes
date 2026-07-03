@@ -11,9 +11,9 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const { user, isAdmin } = useIsAdmin();
   const navigate = useNavigate();
-  const { data: company } = useCompany();
+  const { data: company, isLoading } = useCompany();
   const c = company ?? COMPANY_FALLBACK;
-  const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
+  const initial = (c.name?.trim()?.[0] ?? "").toUpperCase();
   const nl = c.nav_labels ?? {};
   const links = [
     { to: "/" as const, label: nl.home || defaultLabels.home },
