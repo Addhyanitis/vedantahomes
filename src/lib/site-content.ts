@@ -60,6 +60,9 @@ export type CompanyInfo = {
   owner_bio: string;
   owner_image_url: string;
   nav_labels: NavLabels;
+  hero_video_url: string;
+  hero_poster_url: string;
+  hero_video_enabled: boolean;
 };
 
 const fallbackPlotImages = [
@@ -142,6 +145,9 @@ async function fetchCompany(): Promise<CompanyInfo> {
       owner_bio: "",
       owner_image_url: "",
       nav_labels: {},
+      hero_video_url: "",
+      hero_poster_url: "",
+      hero_video_enabled: true,
     }
   );
 }
@@ -172,4 +178,7 @@ export const COMPANY_FALLBACK: CompanyInfo = {
   owner_bio: "",
   owner_image_url: "",
   nav_labels: {},
+  hero_video_url: "",
+  hero_poster_url: "",
+  hero_video_enabled: true,
 };

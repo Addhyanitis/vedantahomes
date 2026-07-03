@@ -43,6 +43,9 @@ function AdminCompanyPage() {
         owner_name: form.owner_name ?? "", owner_title: form.owner_title ?? "",
         owner_bio: form.owner_bio ?? "", owner_image_url: form.owner_image_url ?? "",
         nav_labels: form.nav_labels ?? {},
+        hero_video_url: form.hero_video_url ?? "",
+        hero_poster_url: form.hero_poster_url ?? "",
+        hero_video_enabled: form.hero_video_enabled ?? true,
       }).eq("id", 1);
       if (error) throw error;
       toast.success("Company info saved");
@@ -189,6 +192,46 @@ function AdminCompanyPage() {
               />
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="rounded-2xl bg-white p-6 ring-1 ring-black/5 space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-semibold">Landing hero background video</h3>
+            <p className="text-xs text-zinc-500 mt-1">Plays muted in the top of the home page. Poster shows before the video loads or when disabled.</p>
+          </div>
+          <label className="inline-flex items-center gap-2 text-sm cursor-pointer select-none">
+            <input
+              type="checkbox"
+              className="size-4 accent-brand"
+              checked={form.hero_video_enabled ?? true}
+              onChange={(e) => set("hero_video_enabled", e.target.checked)}
+            />
+            {form.hero_video_enabled ? "Enabled" : "Disabled"}
+          </label>
+        </div>
+        <div>
+          <label className={labelCls}>Background video (mp4/webm)</label>
+          <div className="mt-1">
+            <ImageUploader
+              value={form.hero_video_url ?? ""}
+              onChange={(v) => set("hero_video_url", v)}
+              folder="misc"
+              accept="video/*"
+              kind="video"
+            />
+          </div>
+        </div>
+        <div>
+          <label className={labelCls}>Poster image (fallback / preview)</label>
+          <div className="mt-1">
+            <ImageUploader
+              value={form.hero_poster_url ?? ""}
+              onChange={(v) => set("hero_poster_url", v)}
+              folder="misc"
+            />
+          </div>
         </div>
       </div>
 
