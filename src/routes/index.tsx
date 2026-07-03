@@ -41,16 +41,27 @@ function HomePage() {
     <PageShell>
       {/* HERO */}
       <section className="relative bg-surface py-16 md:py-24 overflow-hidden">
-        <video
-          src={heroVideo.url}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
-        />
+        {company.hero_video_enabled && (company.hero_video_url || heroVideo.url) && (
+          <video
+            src={company.hero_video_url || heroVideo.url}
+            poster={company.hero_poster_url || undefined}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
+          />
+        )}
+        {!company.hero_video_enabled && company.hero_poster_url && (
+          <img
+            src={company.hero_poster_url}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
+          />
+        )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface/70 via-surface/60 to-surface" />
         <div className="relative container-page grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 animate-fade-up">
