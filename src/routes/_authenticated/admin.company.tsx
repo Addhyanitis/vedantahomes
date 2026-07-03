@@ -43,6 +43,9 @@ function AdminCompanyPage() {
         owner_name: form.owner_name ?? "", owner_title: form.owner_title ?? "",
         owner_bio: form.owner_bio ?? "", owner_image_url: form.owner_image_url ?? "",
         nav_labels: form.nav_labels ?? {},
+        hero_video_url: form.hero_video_url ?? "",
+        hero_poster_url: form.hero_poster_url ?? "",
+        hero_video_enabled: form.hero_video_enabled ?? true,
       }).eq("id", 1);
       if (error) throw error;
       toast.success("Company info saved");
