@@ -2,9 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { useCompany, COMPANY_FALLBACK } from "@/lib/site-content";
 
 export function SiteFooter() {
-  const { data: company } = useCompany();
+  const { data: company, isLoading } = useCompany();
   const c = company ?? COMPANY_FALLBACK;
-  const initial = (c.name?.trim()?.[0] ?? "R").toUpperCase();
+  const initial = (c.name?.trim()?.[0] ?? "").toUpperCase();
 
   return (
     <footer className="border-t border-black/5 bg-surface py-14">
