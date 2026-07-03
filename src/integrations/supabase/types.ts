@@ -55,6 +55,9 @@ export type Database = {
           about_text: string
           address: string
           email: string
+          hero_poster_url: string
+          hero_video_enabled: boolean
+          hero_video_url: string
           id: number
           logo_url: string
           name: string
@@ -73,6 +76,9 @@ export type Database = {
           about_text?: string
           address?: string
           email?: string
+          hero_poster_url?: string
+          hero_video_enabled?: boolean
+          hero_video_url?: string
           id?: number
           logo_url?: string
           name?: string
@@ -91,6 +97,9 @@ export type Database = {
           about_text?: string
           address?: string
           email?: string
+          hero_poster_url?: string
+          hero_video_enabled?: boolean
+          hero_video_url?: string
           id?: number
           logo_url?: string
           name?: string
