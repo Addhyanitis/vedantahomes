@@ -60,6 +60,9 @@ export type CompanyInfo = {
   owner_bio: string;
   owner_image_url: string;
   nav_labels: NavLabels;
+  hero_video_url: string;
+  hero_poster_url: string;
+  hero_video_enabled: boolean;
 };
 
 const fallbackPlotImages = [
