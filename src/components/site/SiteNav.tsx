@@ -32,21 +32,30 @@ export function SiteNav() {
     <nav className="sticky top-0 z-50 w-full border-b border-black/5 bg-surface/80 backdrop-blur-md">
       <div className="container-page flex h-16 items-center justify-between">
         <div className="flex items-center gap-10">
-          <Link to="/" className="flex items-center gap-2">
-            {c.logo_url ? (
-              <img src={c.logo_url} alt={`${c.name} logo`} className="h-8 w-8 rounded-md object-contain bg-white ring-1 ring-black/5" />
+          <Link to="/" className="flex items-center gap-2 min-h-8">
+            {isLoading ? (
+              <>
+                <span className="h-8 w-8 rounded-md bg-zinc-100 animate-pulse" />
+                <span className="h-4 w-28 rounded bg-zinc-100 animate-pulse" />
+              </>
             ) : (
-              <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
-                {initial}
-              </span>
+              <>
+                {c.logo_url ? (
+                  <img src={c.logo_url} alt={`${c.name} logo`} className="h-8 w-8 rounded-md object-contain bg-white ring-1 ring-black/5" />
+                ) : initial ? (
+                  <span className="grid h-8 w-8 place-items-center rounded-md bg-brand text-white font-bold text-sm">
+                    {initial}
+                  </span>
+                ) : null}
+                <span className="text-lg font-semibold tracking-tight text-navy">
+                  {c.name_segments && c.name_segments.length > 0
+                    ? c.name_segments.map((s, i) => (
+                        <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
+                      ))
+                    : c.name}
+                </span>
+              </>
             )}
-            <span className="text-lg font-semibold tracking-tight text-navy">
-              {c.name_segments && c.name_segments.length > 0
-                ? c.name_segments.map((s, i) => (
-                    <span key={i} style={{ color: s.color || undefined }}>{s.text}</span>
-                  ))
-                : c.name}
-            </span>
           </Link>
           <div className="hidden md:flex items-center gap-7">
             {links.map((l) => (
