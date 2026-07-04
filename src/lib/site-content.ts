@@ -119,7 +119,14 @@ export function useProjects() {
   return useQuery({ queryKey: ["projects"], queryFn: fetchProjects });
 }
 export function useCompany() {
-  return useQuery({ queryKey: ["company"], queryFn: fetchCompany });
+  const initialCompany = useCompanyContext();
+  return useQuery({
+    queryKey: ["company"],
+    queryFn: fetchCompany,
+    initialData: initialCompany,
+    staleTime: 5 * 60 * 1000,
+  });
 }
+
 export { COMPANY_FALLBACK } from "./site-content.types";
 
