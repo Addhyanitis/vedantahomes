@@ -6,6 +6,8 @@ import {
   type NavLabels,
   COMPANY_FALLBACK,
 } from "./site-content.types";
+import { useCompanyContext } from "./company-context";
+
 import plotAerialMain from "@/assets/plot-aerial-main.jpg";
 import plotGate from "@/assets/plot-gate.jpg";
 import plotRiverside from "@/assets/plot-riverside.jpg";
