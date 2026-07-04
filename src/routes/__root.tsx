@@ -12,12 +12,6 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "sonner";
-import { getCompany } from "@/lib/company.functions";
-import { COMPANY_FALLBACK } from "@/lib/site-content.types";
-import { CompanyProvider } from "@/lib/company-context";
-
-
-
 
 function NotFoundComponent() {
   return (
@@ -113,18 +107,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
-  loader: async () => {
-    try {
-      return (await getCompany()) ?? COMPANY_FALLBACK;
-    } catch (error) {
-      console.error("Failed to load company info:", error);
-      return COMPANY_FALLBACK;
-    }
-  },
   shellComponent: RootShell,
-
   component: RootComponent,
-
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
@@ -145,22 +129,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const company = Route.useLoaderData();
-  if (typeof window !== "undefined") {
-    (window as any).__rootCompany = company;
-    console.log("RootComponent company", company?.name);
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CompanyProvider company={company}>
-        <Outlet />
-        <Toaster position="top-center" richColors />
-      </CompanyProvider>
+      <Outlet />
+      <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );
 }
-
-
-
-
