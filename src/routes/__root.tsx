@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "sonner";
 import { getCompany } from "@/lib/company.functions";
 import { COMPANY_FALLBACK } from "@/lib/site-content.types";
+import { CompanyProvider } from "@/lib/company-context";
+
 
 
 
