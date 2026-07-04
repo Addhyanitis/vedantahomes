@@ -1,5 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  type CompanyInfo,
+  type NameSegment,
+  type NavLabels,
+  COMPANY_FALLBACK,
+} from "./site-content.types";
 import plotAerialMain from "@/assets/plot-aerial-main.jpg";
 import plotGate from "@/assets/plot-gate.jpg";
 import plotRiverside from "@/assets/plot-riverside.jpg";
@@ -34,36 +40,8 @@ export type Project = {
   sort_order: number;
 };
 
-export type NameSegment = { text: string; color: string };
+export type { CompanyInfo, NameSegment, NavLabels };
 
-export type NavLabels = {
-  home?: string;
-  spaces?: string;
-  projects?: string;
-  about?: string;
-  book?: string;
-};
-
-export type CompanyInfo = {
-  id: number;
-  name: string;
-  tagline: string;
-  phone: string;
-  email: string;
-  address: string;
-  stats: { value: string; label: string }[];
-  about_text: string;
-  logo_url: string;
-  name_segments: NameSegment[];
-  owner_name: string;
-  owner_title: string;
-  owner_bio: string;
-  owner_image_url: string;
-  nav_labels: NavLabels;
-  hero_video_url: string;
-  hero_poster_url: string;
-  hero_video_enabled: boolean;
-};
 
 const fallbackPlotImages = [
   plotAerialMain,
@@ -128,29 +106,9 @@ async function fetchCompany(): Promise<CompanyInfo> {
     .maybeSingle();
   if (error) throw error;
   const c = data as unknown as CompanyInfo | null;
-  return (
-    c ?? {
-      id: 1,
-      name: "",
-      tagline: "",
-      phone: "",
-      email: "",
-      address: "",
-      stats: [],
-      about_text: "",
-      logo_url: "",
-      name_segments: [],
-      owner_name: "",
-      owner_title: "",
-      owner_bio: "",
-      owner_image_url: "",
-      nav_labels: {},
-      hero_video_url: "",
-      hero_poster_url: "",
-      hero_video_enabled: true,
-    }
-  );
+  return c ?? COMPANY_FALLBACK;
 }
+
 
 export function usePlots() {
   return useQuery({ queryKey: ["plots"], queryFn: fetchPlots });
@@ -161,24 +119,5 @@ export function useProjects() {
 export function useCompany() {
   return useQuery({ queryKey: ["company"], queryFn: fetchCompany });
 }
+export { COMPANY_FALLBACK } from "./site-content.types";
 
-export const COMPANY_FALLBACK: CompanyInfo = {
-  id: 1,
-  name: "",
-  tagline: "",
-  phone: "",
-  email: "",
-  address: "",
-  stats: [],
-  about_text: "",
-  logo_url: "",
-  name_segments: [],
-  owner_name: "",
-  owner_title: "",
-  owner_bio: "",
-  owner_image_url: "",
-  nav_labels: {},
-  hero_video_url: "",
-  hero_poster_url: "",
-  hero_video_enabled: true,
-};

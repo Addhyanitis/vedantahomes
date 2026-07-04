@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, queryOptions } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "sonner";
+import { getCompany } from "@/lib/company.functions";
+import { COMPANY_FALLBACK } from "@/lib/site-content.types";
+
 
 function NotFoundComponent() {
   return (
@@ -107,8 +110,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
+  loader: async ({ context: { queryClient } }) => {
+    const companyQuery = queryOptions({
+      queryKey: ["company"],
+      queryFn: async () => (await getCompany()) ?? COMPANY_FALLBACK,
+      staleTime: 5 * 60 * 1000,
+    });
+    await queryClient.ensureQueryData(companyQuery);
+  },
   shellComponent: RootShell,
   component: RootComponent,
+
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
@@ -129,6 +141,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const company = Route.useLoaderData();
+  queryClient.setQueryData(["company"], company);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -137,3 +151,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
