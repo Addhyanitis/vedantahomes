@@ -7,10 +7,9 @@ import { BrandLoader } from "./BrandLoader";
 
 export function PageShell({ children }: { children: ReactNode }) {
   const { data: company, isLoading } = useCompany();
-
-
   const [ready, setReady] = useState(false);
   const [hidden, setHidden] = useState(false);
+
 
   useEffect(() => {
     if (!isLoading && company) {
