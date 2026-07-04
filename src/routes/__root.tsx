@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider, queryOptions } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "sonner";
 import { getCompany } from "@/lib/company.functions";
 import { COMPANY_FALLBACK } from "@/lib/site-content.types";
+
 
 
 function NotFoundComponent() {
