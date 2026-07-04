@@ -111,15 +111,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
-  loader: async ({ context: { queryClient } }) => {
-    const companyQuery = queryOptions({
-      queryKey: ["company"],
-      queryFn: async () => (await getCompany()) ?? COMPANY_FALLBACK,
-      staleTime: 5 * 60 * 1000,
-    });
-    await queryClient.ensureQueryData(companyQuery);
+  loader: async () => {
+    try {
+      return (await getCompany()) ?? COMPANY_FALLBACK;
+    } catch (error) {
+      console.error("Failed to load company info:", error);
+      return COMPANY_FALLBACK;
+    }
   },
   shellComponent: RootShell,
+
   component: RootComponent,
 
   notFoundComponent: NotFoundComponent,
