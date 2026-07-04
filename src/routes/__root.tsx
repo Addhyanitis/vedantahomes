@@ -146,6 +146,10 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const company = Route.useLoaderData();
+  if (typeof window !== "undefined") {
+    (window as any).__rootCompany = company;
+    console.log("RootComponent company", company?.name);
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -156,6 +160,7 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
 
 
 
