@@ -146,15 +146,16 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const company = Route.useLoaderData();
-  console.log("RootComponent setQueryData", company?.name);
-  queryClient.setQueryData(["company"], company);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
-      <Toaster position="top-center" richColors />
+      <CompanyProvider company={company}>
+        <Outlet />
+        <Toaster position="top-center" richColors />
+      </CompanyProvider>
     </QueryClientProvider>
   );
 }
+
 
 
