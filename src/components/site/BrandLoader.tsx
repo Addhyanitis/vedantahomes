@@ -8,9 +8,8 @@ export function BrandLoader({ company }: { company?: CompanyInfo | null }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-5 bg-surface">
-      <div className="relative grid h-24 w-24 place-items-center">
-        <div className="absolute inset-0 rounded-full border-[3px] border-brand/15 border-t-brand animate-spin" />
-        <div className="absolute inset-2 rounded-full border-[3px] border-navy/10 border-b-navy animate-spin [animation-direction:reverse]" />
+      <div className="relative">
+        <div className="absolute inset-0 rounded-full bg-brand/10 animate-ping" />
         <div className="relative z-10">
           {c?.logo_url ? (
             <img
@@ -44,3 +43,4 @@ export function BrandLoader({ company }: { company?: CompanyInfo | null }) {
     </div>
   );
 }
+
