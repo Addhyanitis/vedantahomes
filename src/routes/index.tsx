@@ -44,7 +44,7 @@ function HomePage() {
     <PageShell>
       {/* HERO */}
       <section className="relative bg-surface py-16 md:py-24 overflow-hidden">
-        {company.hero_video_enabled && (company.hero_video_url || heroVideo.url) && (
+        {company.hero_video_enabled && !isMobile && (company.hero_video_url || heroVideo.url) && (
           <video
             src={company.hero_video_url || heroVideo.url}
             poster={company.hero_poster_url || undefined}
@@ -57,7 +57,7 @@ function HomePage() {
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
           />
         )}
-        {!company.hero_video_enabled && company.hero_poster_url && (
+        {(!company.hero_video_enabled || isMobile) && company.hero_poster_url && (
           <img
             src={company.hero_poster_url}
             alt=""
