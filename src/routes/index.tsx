@@ -43,7 +43,7 @@ function HomePage() {
   return (
     <PageShell>
       {/* HERO */}
-      <section className="relative bg-surface py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-surface py-10 sm:py-16 md:py-24 overflow-hidden">
         {company.hero_video_enabled && !isMobile && (company.hero_video_url || heroVideo.url) && (
           <video
             src={company.hero_video_url || heroVideo.url}
