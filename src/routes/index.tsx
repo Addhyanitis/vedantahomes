@@ -30,9 +30,12 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 function HomePage() {
   const { data: plots = [] } = usePlots();
   const { data: company = COMPANY_FALLBACK } = useCompany();
+  const isMobile = useIsMobile();
   const featured = plots.slice(0, 4);
   const main = featured[0];
   const rest = featured.slice(1);
