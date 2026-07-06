@@ -114,24 +114,25 @@ function HomePage() {
 
       {/* FEATURED PLOTS — Bento */}
       {main && (
-        <section className="bg-zinc-100 py-20 md:py-24">
+        <section className="bg-zinc-100 py-14 sm:py-20 md:py-24">
           <div className="container-page">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <span className="text-xs font-semibold text-brand uppercase tracking-widest">
+            <div className="flex flex-wrap items-end justify-between gap-3 mb-8 sm:mb-10">
+              <div className="min-w-0">
+                <span className="text-[10px] sm:text-xs font-semibold text-brand uppercase tracking-widest">
                   Featured Listings
                 </span>
-                <h2 className="mt-2 text-3xl md:text-4xl font-semibold text-zinc-900">
+                <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold text-zinc-900">
                   Active Land Parcels
                 </h2>
               </div>
               <Link
                 to="/plots"
-                className="hidden sm:inline-flex text-sm font-medium text-brand hover:underline underline-offset-4"
+                className="text-xs sm:text-sm font-medium text-brand hover:underline underline-offset-4 shrink-0"
               >
-                View all {plots.length} plots →
+                View all {plots.length} →
               </Link>
             </div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
               <article className="md:col-span-2 md:row-span-2 group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition hover:ring-brand/30">
