@@ -160,7 +160,7 @@ function HomePage() {
 
               {rest[0] && (
                 <article className="md:col-span-2 group flex gap-4 overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-black/5 transition hover:ring-brand/30">
-                  <div className="h-full w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+                  <div className="h-24 w-28 sm:h-full sm:w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
                     <img src={plotImageUrl(rest[0], 1)} alt={rest[0].name} className="h-full w-full object-cover" />
                   </div>
                   <div className="flex flex-1 flex-col justify-between py-1">
