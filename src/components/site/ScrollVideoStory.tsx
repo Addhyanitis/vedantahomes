@@ -18,10 +18,10 @@ export function ScrollVideoStory() {
 
 function MobileStory() {
   // Mobile: no scroll-scrubbing (mp4 currentTime is very laggy on phones).
-  // Use a normal auto-playing loop with stacked content.
+  // Use a normal auto-playing loop with content overlaid.
   return (
     <section className="relative bg-navy text-white overflow-hidden" aria-label="From land to home">
-      <div className="relative h-[70vh] w-full overflow-hidden">
+      <div className="relative h-[55vh] min-h-[420px] w-full overflow-hidden">
         <video
           src={videoAsset.url}
           autoPlay
@@ -31,32 +31,34 @@ function MobileStory() {
           preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/40 to-navy" />
-        <div className="relative z-10 flex h-full items-end container-page pb-10">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white ring-1 ring-white/20">
-              The Journey
-            </span>
-            <h2 className="mt-3 text-3xl font-semibold leading-[1.1] text-balance">
-              From open land to a place called home.
-            </h2>
-          </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/50 via-navy/40 to-navy/90" />
+        <div className="relative z-10 flex h-full flex-col justify-end container-page pb-8">
+          <span className="inline-flex self-start items-center gap-2 rounded-full bg-brand/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white ring-1 ring-white/20">
+            The Journey
+          </span>
+          <h2 className="mt-3 text-2xl sm:text-3xl font-semibold leading-[1.15] text-balance">
+            From open land to a place called home.
+          </h2>
+          <p className="mt-2 text-sm text-white/70 max-w-[42ch]">
+            Every plot we develop walks this path.
+          </p>
         </div>
       </div>
-      <div className="container-page py-10 grid grid-cols-1 gap-3">
+      <div className="container-page py-8 grid grid-cols-2 gap-3">
         {STAGES.map((s, i) => (
-          <div key={s.title} className="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
-            <div className="text-[10px] font-semibold uppercase tracking-widest text-brand">
+          <div key={s.title} className="rounded-xl bg-white/5 p-3 ring-1 ring-white/10">
+            <div className="text-[9px] font-semibold uppercase tracking-widest text-brand">
               Stage {i + 1}
             </div>
-            <div className="mt-1 font-semibold">{s.title}</div>
-            <p className="mt-1 text-xs text-white/70">{s.text}</p>
+            <div className="mt-1 text-sm font-semibold">{s.title}</div>
+            <p className="mt-1 text-[11px] leading-snug text-white/70">{s.text}</p>
           </div>
         ))}
       </div>
     </section>
   );
 }
+
 
 function DesktopScrollStory() {
   const wrapRef = useRef<HTMLDivElement>(null);
