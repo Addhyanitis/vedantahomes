@@ -30,9 +30,12 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 function HomePage() {
   const { data: plots = [] } = usePlots();
   const { data: company = COMPANY_FALLBACK } = useCompany();
+  const isMobile = useIsMobile();
   const featured = plots.slice(0, 4);
   const main = featured[0];
   const rest = featured.slice(1);
@@ -41,7 +44,7 @@ function HomePage() {
     <PageShell>
       {/* HERO */}
       <section className="relative bg-surface py-16 md:py-24 overflow-hidden">
-        {company.hero_video_enabled && (company.hero_video_url || heroVideo.url) && (
+        {company.hero_video_enabled && !isMobile && (company.hero_video_url || heroVideo.url) && (
           <video
             src={company.hero_video_url || heroVideo.url}
             poster={company.hero_poster_url || undefined}
@@ -54,7 +57,7 @@ function HomePage() {
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
           />
         )}
-        {!company.hero_video_enabled && company.hero_poster_url && (
+        {(!company.hero_video_enabled || isMobile) && company.hero_poster_url && (
           <img
             src={company.hero_poster_url}
             alt=""
@@ -157,7 +160,7 @@ function HomePage() {
 
               {rest[0] && (
                 <article className="md:col-span-2 group flex gap-4 overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-black/5 transition hover:ring-brand/30">
-                  <div className="h-full w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+                  <div className="h-24 w-28 sm:h-full sm:w-40 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
                     <img src={plotImageUrl(rest[0], 1)} alt={rest[0].name} className="h-full w-full object-cover" />
                   </div>
                   <div className="flex flex-1 flex-col justify-between py-1">
