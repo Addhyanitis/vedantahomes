@@ -40,8 +40,8 @@ export function SiteFooter() {
               <p className="mt-4 text-sm text-zinc-500 text-pretty">{c.tagline}</p>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-12 sm:grid-cols-3">
-            <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-8 sm:gap-12 sm:grid-cols-3">
+            <div className="space-y-3 min-w-0">
               <h5 className="text-xs font-semibold uppercase tracking-widest text-zinc-900">
                 Explore
               </h5>
@@ -52,13 +52,13 @@ export function SiteFooter() {
                 <li><Link to="/book" className="hover:text-brand">{c.nav_labels?.book || "Book Visit"}</Link></li>
               </ul>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-3 min-w-0">
               <h5 className="text-xs font-semibold uppercase tracking-widest text-zinc-900">
                 Contact
               </h5>
-              <ul className="space-y-2 text-sm text-zinc-500">
+              <ul className="space-y-2 text-sm text-zinc-500 break-words">
                 {c.phone && <li><a href={`tel:${c.phone.replace(/\s+/g, "")}`} className="hover:text-brand">{c.phone}</a></li>}
-                {c.email && <li><a href={`mailto:${c.email}`} className="hover:text-brand">{c.email}</a></li>}
+                {c.email && <li><a href={`mailto:${c.email}`} className="hover:text-brand break-all">{c.email}</a></li>}
                 {c.address && <li className="max-w-[24ch]"><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}`} target="_blank" rel="noopener noreferrer" className="hover:text-brand">{c.address}</a></li>}
               </ul>
             </div>
