@@ -62,7 +62,7 @@ export function SiteFooter() {
                 {c.address && <li className="max-w-[24ch]"><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}`} target="_blank" rel="noopener noreferrer" className="hover:text-brand">{c.address}</a></li>}
               </ul>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-3 col-span-2 sm:col-span-1 min-w-0">
               <h5 className="text-xs font-semibold uppercase tracking-widest text-zinc-900">
                 Compliance
               </h5>
