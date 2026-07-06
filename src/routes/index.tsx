@@ -43,7 +43,7 @@ function HomePage() {
   return (
     <PageShell>
       {/* HERO */}
-      <section className="relative bg-surface py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-surface py-10 sm:py-16 md:py-24 overflow-hidden">
         {company.hero_video_enabled && !isMobile && (company.hero_video_url || heroVideo.url) && (
           <video
             src={company.hero_video_url || heroVideo.url}
@@ -66,43 +66,45 @@ function HomePage() {
           />
         )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface/70 via-surface/60 to-surface" />
-        <div className="relative container-page grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="relative container-page grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
           <div className="lg:col-span-7 animate-fade-up">
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand">
-              <Sparkles className="size-3.5" /> RERA Approved · CREDAI Member · Clear Titles
+            <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-brand">
+              <Sparkles className="size-3.5 shrink-0" />
+              <span className="truncate">RERA Approved · CREDAI · Clear Titles</span>
             </span>
-            <h1 className="mt-5 text-4xl md:text-6xl font-semibold text-zinc-900 leading-[1.05] text-balance">
+            <h1 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-6xl font-semibold text-zinc-900 leading-[1.08] text-balance">
               Find your ground in the heart of the valley.
             </h1>
-            <p className="mt-6 max-w-[58ch] text-base sm:text-lg text-zinc-600 text-pretty">
+            <p className="mt-4 sm:mt-6 max-w-[58ch] text-sm sm:text-base md:text-lg text-zinc-600 text-pretty">
               {company.tagline || "Premium residential plots designed for generational growth."}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 sm:mt-8 flex flex-wrap gap-3">
               <Link
                 to="/plots"
-                className="inline-flex items-center gap-2 rounded-md bg-navy px-5 py-3 text-sm font-medium text-white ring-1 ring-navy transition hover:brightness-110"
+                className="inline-flex items-center gap-2 rounded-md bg-navy px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-medium text-white ring-1 ring-navy transition hover:brightness-110"
               >
                 Browse Listings <ArrowRight className="size-4" />
               </Link>
               <Link
                 to="/book"
-                className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-medium text-zinc-900 ring-1 ring-black/10 transition hover:ring-brand/40"
+                className="inline-flex items-center gap-2 rounded-md bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-medium text-zinc-900 ring-1 ring-black/10 transition hover:ring-brand/40"
               >
                 Schedule a site visit
               </Link>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
+            <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-6 max-w-md">
               {company.stats.map((s) => (
-                <div key={s.label}>
-                  <div className="text-2xl font-semibold text-navy">{s.value}</div>
-                  <div className="mt-1 text-[11px] font-medium uppercase tracking-wider text-zinc-500">
+                <div key={s.label} className="min-w-0">
+                  <div className="text-xl sm:text-2xl font-semibold text-navy">{s.value}</div>
+                  <div className="mt-1 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-zinc-500 leading-tight">
                     {s.label}
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
 
           <div className="lg:col-span-5">
             <BookingForm />
@@ -112,24 +114,25 @@ function HomePage() {
 
       {/* FEATURED PLOTS — Bento */}
       {main && (
-        <section className="bg-zinc-100 py-20 md:py-24">
+        <section className="bg-zinc-100 py-14 sm:py-20 md:py-24">
           <div className="container-page">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <span className="text-xs font-semibold text-brand uppercase tracking-widest">
+            <div className="flex flex-wrap items-end justify-between gap-3 mb-8 sm:mb-10">
+              <div className="min-w-0">
+                <span className="text-[10px] sm:text-xs font-semibold text-brand uppercase tracking-widest">
                   Featured Listings
                 </span>
-                <h2 className="mt-2 text-3xl md:text-4xl font-semibold text-zinc-900">
+                <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold text-zinc-900">
                   Active Land Parcels
                 </h2>
               </div>
               <Link
                 to="/plots"
-                className="hidden sm:inline-flex text-sm font-medium text-brand hover:underline underline-offset-4"
+                className="text-xs sm:text-sm font-medium text-brand hover:underline underline-offset-4 shrink-0"
               >
-                View all {plots.length} plots →
+                View all {plots.length} →
               </Link>
             </div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
               <article className="md:col-span-2 md:row-span-2 group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition hover:ring-brand/30">
